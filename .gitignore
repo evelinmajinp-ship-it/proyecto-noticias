@@ -1,0 +1,6 @@
+vproyecto_noticias/
+__pycache__/
+*.pyc
+.env
+db.sqlite3
+media/

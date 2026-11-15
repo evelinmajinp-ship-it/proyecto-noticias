@@ -1,0 +1,568 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Noticias | Centro de Automatización Industrial</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #F7F4F0;
+            color: #352820;
+        }
+
+        /* ENCABEZADO */
+        header {
+            background: #38251F;
+            color: white;
+            padding: 22px 8%;
+        }
+
+        .encabezado {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .institucion h2 {
+            font-size: 21px;
+            letter-spacing: 1px;
+        }
+
+        .institucion p {
+            color: #D9BBA7;
+            font-size: 13px;
+            margin-top: 6px;
+        }
+
+        .etiqueta {
+            border: 1px solid #B98265;
+            color: #E9CDBB;
+            padding: 9px 15px;
+            border-radius: 30px;
+            font-size: 12px;
+        }
+
+        /* PRESENTACIÓN */
+        .presentacion {
+            background: #EAD8C8;
+            padding: 65px 8%;
+        }
+
+        .presentacion-contenido {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .presentacion span {
+            color: #985C42;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .presentacion h1 {
+            color: #38251F;
+            font-size: clamp(35px, 5vw, 58px);
+            margin: 18px 0;
+        }
+
+        .presentacion p {
+            max-width: 650px;
+            color: #685044;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        /* CONTENIDO */
+        main {
+            max-width: 1200px;
+            margin: auto;
+            padding: 55px 25px;
+        }
+
+        .titulo-seccion {
+            margin-bottom: 25px;
+        }
+
+        .titulo-seccion span {
+            color: #B76545;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .titulo-seccion h2 {
+            font-size: 30px;
+            margin-top: 8px;
+            color: #38251F;
+        }
+
+        /* BUSCADOR */
+        .buscador {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 35px;
+        }
+
+        .buscador input {
+            flex: 1;
+            min-width: 0;
+            padding: 14px;
+            border: 1px solid #D9C6B8;
+            border-radius: 7px;
+            font-size: 15px;
+            background: white;
+        }
+
+        .buscador button {
+            background: #80513D;
+            color: white;
+            border: none;
+            padding: 0 24px;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        .buscador a {
+            align-self: center;
+            color: #80513D;
+            text-decoration: none;
+        }
+
+
+/* NOTICIA DESTACADA */
+
+.noticia-destacada {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #E8DDD4;
+    margin-bottom: 55px;
+    min-height: 350px;
+}
+
+.imagen-destacada {
+    min-height: 350px;
+}
+
+.imagen-destacada img {
+    width: 100%;
+    height: 100%;
+    min-height: 350px;
+    object-fit: cover;
+    display: block;
+}
+
+.texto-destacado {
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.etiqueta-destacada {
+    background: #F3E9DD;
+    color: #985C42;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 18px;
+}
+
+.texto-destacado h2 {
+    font-size: 30px;
+    line-height: 1.3;
+    color: #38251F;
+    margin: 12px 0;
+}
+
+.texto-destacado .descripcion {
+    margin-top: 12px;
+}
+
+@media (max-width: 700px) {
+    .noticia-destacada {
+        grid-template-columns: 1fr;
+    }
+
+    .imagen-destacada,
+    .imagen-destacada img {
+        min-height: 230px;
+        height: 230px;
+    }
+
+    .texto-destacado {
+        padding: 25px;
+    }
+
+    .texto-destacado h2 {
+        font-size: 24px;
+    }
+}
+
+
+        /* NOTICIAS */
+        .grid-noticias {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .tarjeta {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #E8DDD4;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .tarjeta:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px #38251F18;
+        }
+
+        .tarjeta img {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .sin-imagen {
+            height: 210px;
+            background: #EAD8C8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #80513D;
+        }
+
+        .contenido {
+            padding: 23px;
+        }
+
+        .fecha {
+            color: #B76545;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .contenido h3 {
+            color: #38251F;
+            font-size: 20px;
+            margin: 13px 0;
+            line-height: 1.4;
+        }
+
+        .lugar {
+            color: #806B5E;
+            font-size: 13px;
+            margin-bottom: 14px;
+        }
+
+        .descripcion {
+            color: #66574E;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .leer-mas {
+            display: inline-block;
+            margin-top: 20px;
+            color: #A65F42;
+            font-weight: bold;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .leer-mas:hover {
+            color: #38251F;
+        }
+
+        /* SIN NOTICIAS */
+        .vacio {
+            background: white;
+            border: 1px solid #E8DDD4;
+            border-radius: 12px;
+            padding: 45px 20px;
+            text-align: center;
+            color: #806B5E;
+            grid-column: 1 / -1;
+        }
+
+        /* PAGINACIÓN */
+        .paginacion {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 18px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .paginacion a {
+            color: #80513D;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .paginacion span {
+            color: #66574E;
+            font-size: 14px;
+        }
+
+        /* PIE DE PÁGINA */
+        footer {
+            background: #38251F;
+            color: #E9CDBB;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 30px;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 850px) {
+            .grid-noticias {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 20px;
+            }
+
+            .encabezado {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .presentacion {
+                padding: 45px 25px;
+            }
+
+            main {
+                padding: 40px 18px;
+            }
+
+            .grid-noticias {
+                grid-template-columns: 1fr;
+            }
+
+            .buscador {
+                flex-wrap: wrap;
+            }
+
+            .buscador button {
+                padding: 14px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="encabezado">
+            <div class="institucion">
+                <h2>Centro de Automatización Industrial</h2>
+                <p>SENA | Regional Valle</p>
+            </div>
+
+            <div class="etiqueta">
+                PORTAL INSTITUCIONAL
+            </div>
+        </div>
+    </header>
+
+    <section class="presentacion">
+        <div class="presentacion-contenido">
+            <span>ACTUALIDAD INSTITUCIONAL</span>
+
+            <h1>Noticias y actualidad</h1>
+
+            <p>
+                Conoce los acontecimientos, actividades y novedades
+                del Centro de Automatización Industrial.
+                Mantente informado sobre lo que sucede en nuestra comunidad.
+            </p>
+        </div>
+    </section>
+
+    <main>
+
+        <div class="titulo-seccion">
+            <span>ENTÉRATE</span>
+            <h2>Últimas noticias</h2>
+        </div>
+
+        <form method="GET" class="buscador">
+            <input
+                type="text"
+                name="buscar"
+                placeholder="Buscar noticias..."
+                value="{{ busqueda }}"
+            >
+
+            <button type="submit">Buscar</button>
+
+            {% if busqueda %}
+                <a href="{% url 'inicio' %}">Limpiar</a>
+            {% endif %}
+        </form>
+
+
+{% if noticia_destacada %}
+
+<section class="noticia-destacada">
+
+    <div class="imagen-destacada">
+        {% if noticia_destacada.imagen %}
+            <img
+                src="{{ noticia_destacada.imagen.url }}"
+                alt="{{ noticia_destacada.titulo }}"
+            >
+        {% else %}
+            <div class="sin-imagen">
+                Imagen no disponible
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="texto-destacado">
+
+        <span class="etiqueta-destacada">
+            NOTICIA DESTACADA
+        </span>
+
+        <p class="fecha">
+            {{ noticia_destacada.fecha_ocurrencia|date:"d/m/Y" }}
+        </p>
+
+        <h2>{{ noticia_destacada.titulo }}</h2>
+
+        <p class="lugar">
+            {{ noticia_destacada.lugar }}
+        </p>
+
+        <p class="descripcion">
+            {{ noticia_destacada.descripcion }}
+        </p>
+
+        <a
+            href="{% url 'detalle_noticia' noticia_destacada.pk %}"
+            class="leer-mas"
+        >
+            Leer noticia completa →
+        </a>
+
+    </div>
+
+</section>
+
+{% endif %}
+
+        <div class="grid-noticias">
+
+            {% for noticia in noticias %}
+
+                <article class="tarjeta">
+
+                    {% if noticia.imagen %}
+                        <img src="{{ noticia.imagen.url }}"
+                             alt="{{ noticia.titulo }}">
+                    {% else %}
+                        <div class="sin-imagen">
+                            Imagen no disponible
+                        </div>
+                    {% endif %}
+
+                    <div class="contenido">
+
+                        <span class="fecha">
+                            {{ noticia.fecha_ocurrencia|date:"d/m/Y" }}
+                        </span>
+
+                        <h3>{{ noticia.titulo }}</h3>
+
+                        <p class="lugar">
+                            {{ noticia.lugar }}
+                        </p>
+
+                        <p class="descripcion">
+                            {{ noticia.descripcion }}
+                        </p>
+
+                        <a href="{% url 'detalle_noticia' noticia.pk %}"
+                           class="leer-mas">
+                            Leer noticia completa →
+                        </a>
+
+                    </div>
+                </article>
+
+            {% empty %}
+
+                <div class="vacio">
+                    <h3>No se encontraron noticias</h3>
+                    <p>Intenta realizar otra búsqueda.</p>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% if noticias.has_other_pages %}
+            <nav class="paginacion">
+
+                {% if noticias.has_previous %}
+                    <a href="?page={{ noticias.previous_page_number }}{% if busqueda %}&buscar={{ busqueda|urlencode }}{% endif %}">
+                        Anterior
+                    </a>
+                {% endif %}
+
+                <span>
+                    Página {{ noticias.number }} de {{ noticias.paginator.num_pages }}
+                </span>
+
+                {% if noticias.has_next %}
+                    <a href="?page={{ noticias.next_page_number }}{% if busqueda %}&buscar={{ busqueda|urlencode }}{% endif %}">
+                        Siguiente
+                    </a>
+                {% endif %}
+
+            </nav>
+        {% endif %}
+
+    </main>
+
+    <footer>
+        <strong>Centro de Automatización Industrial</strong>
+        <p>SENA | Regional Valle</p>
+        <p>Información y actualidad de nuestra comunidad educativa.</p>
+    </footer>
+
+</body>
+</html>
